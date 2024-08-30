@@ -1,0 +1,57 @@
+server:
+  port: 9000
+
+spring:
+  profiles:
+    active:
+      - "qa"
+  config:
+    import: "optional:configserver:http://localhost:8071/"
+
+  application:
+    name: "cards"
+
+  rabbitmq:
+    host: "localhost"
+    port: 5672
+    username: "guest"
+    password: "guest"
+
+#  #  database configuration
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/card_microservice
+#    username: root
+#    password: Amit@1999
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#    show-sql: true
+
+  #  h2 database configuration
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+build:
+  version: "3.0"
+
+account:
+  message: "Welcome to EazyBank cards related prod APIs "
+  contactDetails:
+    name: "Amit Parouha - Developer"
+    email: "amit@eazybank.com"
+  onCallSupport:
+    - (453) 392-4829
+    - (236) 203-0384
+
+# actuator related configuration for exposing all the endpoint
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

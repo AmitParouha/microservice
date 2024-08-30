@@ -1,0 +1,49 @@
+server:
+  port: 8080
+
+spring:
+  profiles:
+    active:
+      - "qa"
+  config:
+    import: "optional:configserver:http://localhost:8071/"
+
+  application:
+    name: "accounts"
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+  #  h2 database configuration
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+# we will access these property in the controller classes with the help of @Value
+build:
+  version: "3.0"
+
+# account contact details we access it using @ConfigurationProperties annotation
+account:
+  message: "Welcome to Bank Application accounts related local APIs "
+  contactDetails:
+    name: "Amit Parouha - Developer"
+    email: "amitparouha010@gmail.com"
+  onCallSupport:
+    - (555) 555-1234
+    - (555) 523-1345
+
+# actuator related configuration for exposing all the endpoint
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
