@@ -1,0 +1,45 @@
+spring:
+  config:
+    import:
+      - "application-qa.yml"
+      - "application-prod.yml"
+  profiles:
+    active:
+      - "qa"
+
+  application:
+    name: Account Service
+
+##  MYSQL database configuration
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/account_microservice
+#    username: root
+#    password: Amit@1999
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#    show-sql: true
+
+  #  h2 database configuration
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+# we will access these property in the controller classes with the help of @Value
+build:
+  version: "3.0"
+
+# account contact details we access it using @ConfigurationProperties annotation
+account:
+  message: "Welcome to Bank Application accounts related local APIs "
+  contactDetails:
+    name: "Amit Parouha - Developer"
+    email: "amitparouha010@gmail.com"
+  onCallSupport:
+    - (555) 555-1234
+    - (555) 523-1345
