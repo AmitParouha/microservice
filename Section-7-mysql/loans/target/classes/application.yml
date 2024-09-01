@@ -1,0 +1,45 @@
+server:
+  port: 8090
+
+spring:
+  profiles:
+    active:
+      - "qa"
+
+  config:
+    import: "optional:configserver:http://localhost:8071/"
+
+  application:
+    name: "loans"
+
+  #  mysql database configuration
+  datasource:
+    url: jdbc:mysql://localhost:3309/loansdb
+    username: root
+    password: root
+  jpa:
+    show-sql: true
+  sql:
+    init:
+      mode: always
+
+
+
+build:
+  version: "3.0"
+
+account:
+  message: "Welcome to EazyBank cards related prod APIs "
+  contactDetails:
+    name: "Amit Parouha - Developer"
+    email: "aishwarya@eazybank.com"
+  onCallSupport:
+    - (453) 392-4829
+    - (236) 203-0384
+
+# actuator related configuration for exposing all the endpoint
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
