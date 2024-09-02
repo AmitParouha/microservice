@@ -1,0 +1,80 @@
+server:
+  port: 9000
+
+spring:
+  profiles:
+    active:
+      - "qa"
+  config:
+    import: "optional:configserver:http://localhost:8071/"
+
+  application:
+    name: "cards"
+
+#  #  database configuration
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/card_microservice
+#    username: root
+#    password: Amit@1999
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#    show-sql: true
+
+  #  h2 database configuration
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+build:
+  version: "3.0"
+
+account:
+  message: "Welcome to EazyBank cards related prod APIs "
+  contactDetails:
+    name: "Amit Parouha - Developer"
+    email: "amit@eazybank.com"
+  onCallSupport:
+    - (453) 392-4829
+    - (236) 203-0384
+
+# actuator related configuration for exposing all the endpoint
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    shutdown:
+      enabled: true
+  # this configuration will allow to load the info related details in Eureka which we
+  # mentioned below in info tag
+  info:
+    env:
+      enabled: true
+
+endpoints:
+  shutdown:
+    enabled: true
+# EurekaServer related configuration
+eureka:
+  instance:
+    # this property will make sure service will register in eureka with the ip address
+    preferIpAddress: true
+  client:
+    fetchRegistry: true
+    registerWithEureka: true
+    serviceUrl:
+      defaultZone: http://localhost:8070/eureka/
+
+# these details will show in the EurekaServer
+info:
+  app:
+    name: "cards"
+    description: "Banking App Cards Application"
+    version: "1.0.0"
